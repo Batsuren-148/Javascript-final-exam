@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html {
+        color: red;
+        padding: 0;
+        margin: 0;
+
+        }
+        body{
+          height: 97vh;
+          display: flex;
+          justify-content: center;
+          align-items: center ;
+          flex-direction: column;
+          background: url(https://images2.alphacoders.com/281/thumb-1920-281452.jpg);
+          background-repeat: no-repeat;
+          background-position: center;
+          background-size: cover;
+        }
+        canvas {
+        background: transparent;
+        display: block;
+        margin: 0 auto;
+        position: relative;
+        border-radius: 10px;
+        border: 1px solid rgba(0, 255, 238,0.5);
+        /* background-image: url(/game.jpg);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain; */
+        }
+        h1 {
+        color: rgb(0, 255, 238);
+        margin: auto;
+        font-family: monospace;
+        font-size: 36px;
+        font-weight: 700;
+        position: absolute;
+        z-index: 999;
+        top: 42%;
+        text-align: center;
+        text-shadow: 1px 3px 5px rgb(0, 255, 238);
+        }
+        h4 {
+        color: green;
+        }
+        #bttn{
+            background-color: red;
+            color: #fff;
+            position: absolute;
+            z-index: 999;
+            top: 50%;
+            padding: 20px 30px;
+            border-radius: 10px;
+            font-family:monospace;
+            font-size: 16px;
+            font-weight: 600;
+            border: none;
+            transition: .3s ease-in-out;
+        }
+        #bttn:hover{
+          box-shadow: 0 3px 15px rgb(255, 0, 0),
+          0 5px 25px rgb(255, 0, 0);
+        }
+        .diffcult{
+          display: none;
+          justify-content: center;
+          align-items: center;
+          position: absolute;
+          top: 35%;
+          flex-direction: column;
+        }
+        .diffcult h2{
+          color: rgb(0, 255, 238);
+          font-family: monospace;
+          font-size: 36px;
+          font-weight: 700;
+          z-index: 999;
+          margin: 0px;
+          text-align: center;
+          text-shadow: 0px 3px 5px rgb(0, 255, 238);
+          padding-bottom: 30px;
+        }
+        .diffcult button{
+            background-color: red;
+            width: 120px;
+            color: #fff;
+            z-index: 999;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-family:monospace;
+            font-size: 16px;
+            font-weight: 600;
+            border: none;
+            transition: .3s ease-in-out;
+            margin-bottom: 15px;
+        }
+        .diffcult button:hover{
+          box-shadow: 0 3px 15px rgb(255, 0, 0),
+          0 5px 25px rgb(255, 0, 0);
+        }
+        .winner{
+          display: none;
+          justify-content: center;
+          align-items: center;
+          position: absolute;
+          top: 20%;
+          flex-direction: column;
+          background-color: black;
+          width: 42.5%;
+          height: 400px;
+          padding: 40px 0px;
+          border-radius: 10px;
+        }
+        .winner img{
+          width: 250px;
+          height: auto;
+          object-fit: contain;
+        }
+        .winner h2{
+          font-family: monospace;
+          font-size: 36px;
+          font-weight: 700;
+          color: rgb(0, 255, 238);
+          text-shadow: 0px 2px 4px rgb(0, 255, 238);
+          margin-bottom: 0px;
+        }
+        .winner button{
+          background-color: red;
+            width: 120px;
+            color: #fff;
+            z-index: 999;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-family:monospace;
+            font-size: 16px;
+            font-weight: 600;
+            border: none;
+            transition: .3s ease-in-out;
+            margin-bottom: 15px;
+        }
+        .winner button:hover{
+          box-shadow: 0 3px 15px rgb(255, 0, 0),
+          0 5px 25px rgb(255, 0, 0);
+        }
+        .winner h3{
+            color: #fff;
+            font-family:monospace;
+            font-size: 18px;
+            font-weight: 600;
+        }
+        .lose{
+          display: none;
+          justify-content: center;
+          align-items: center;
+          position: absolute;
+          top: 20%;
+          flex-direction: column;
+          background-color: #fff;
+          width: 42.5%;
+          height: 400px;
+          padding: 40px 0px;
+          border-radius: 10px;
+        }
+        .lose h2{
+          font-family: monospace;
+          font-weight: bold;
+          font-size: 38px;
+          font-weight: 700;
+          color: rgb(0, 0, 0);
+          text-shadow: 0px 2px 4px rgb(0, 0, 0);
+          margin-bottom: 0px;
+        }
+        .lose h3{
+            color: red;
+            font-family:monospace;
+            font-size: 18px;
+            font-weight: 600;
+        }
+        .lose button{
+          background-color: red;
+            width: 120px;
+            color: #fff;
+            z-index: 999;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-family:monospace;
+            font-size: 16px;
+            font-weight: 600;
+            border: none;
+            transition: .3s ease-in-out;
+            margin-bottom: 15px;
+        }
+        .lose button:hover{
+          box-shadow: 0 3px 15px rgb(255, 0, 0),
+          0 5px 25px rgb(255, 0, 0);
+        }
+    </style>
+</head>
+<body>
+      <h1 id="h11">
+        Block Breaker
+      </h1>
+      <!-- <h4>
+        Goal: Eliminate all the bricks.
+      </h4> -->
+    <canvas id="myCanvas" width="650" height="420"></canvas>
+    <button id="bttn" onclick="start()">Start Game</button>
+
+      <div class="diffcult" id="diff">
+        <h2>Choose your diffult</h2>
+        <button id="bttn1" onclick="easy()">Easy</button>
+        <button id="bttn2" onclick="medium()">Medium</button>
+        <button id="bttn3" onclick="hard()">Hard</button>
+      </div>
+
+      <div class="winner" id="winner">
+        <img src="/clipart127479.png" alt="">
+        <h2>Congratulions!!! You Win</h2>
+        <h3 id="winnerTitle">Your score is ...</h3>
+        <button id="back1" onclick="winn()">Return</button>
+      </div>
+
+      <div class="lose" id="lose">
+          <img src="Layer 0.png" alt="">
+          <h2>You Lose</h2>
+          <h3 id="scoreTitle">Your score is ...</h3>
+          <button id="back" onclick="returnfunc()">Return</button>
+      </div>
+    <script>
+var canvas = document.getElementById("myCanvas");
+var ctx = canvas.getContext("2d");
+var ballRadius = 8;
+var x = canvas.width / 2;
+var y = canvas.height - 30;
+
+// var dx = 2;
+// var dy = -2;
+let ball = [2,-2];
+let vx;
+let vy;
+  vx = ball[Math.floor(Math.random()*ball.length)];
+  vy = ball[Math.floor(Math.random()*ball.length)];
+var paddleHeight = 10;
+var paddleWidth = 75;
+var paddleX = (canvas.width - paddleWidth) / 2;
+var rightPressed = false;
+var leftPressed = false;
+var brickRowCount = 7;
+var brickColumnCount;
+var brickWidth = 75;
+var brickHeight = 20;
+var brickPadding = 10;
+var brickOffsetTop = 50;
+var brickOffsetLeft = 30;
+var score = 0;
+var lives;
+var bricks = [];
+var ballSpeed = 1000
+var cr;
+
+
+
+// for (var c = 0; c < brickColumnCount; c++) {
+//   bricks[c] = [];
+//   for (var r = 0; r < brickRowCount; r++) {
+//     bricks[c][r] = { x: 0, y: 0, status: 1 };
+//   }
+// }
+document.addEventListener("keydown", keyDownHandler, false);
+document.addEventListener("keyup", keyUpHandler, false);
+// document.addEventListener("mousemove", mouseMoveHandler, false);
+
+
+function keyDownHandler(e) {
+  if (e.keyCode == 39) {
+    rightPressed = true;
+  } else if (e.keyCode == 37) {
+    leftPressed = true;
+  }
+}
+function keyUpHandler(e) {
+  if (e.keyCode == 39) {
+    rightPressed = false;
+  } else if (e.keyCode == 37) {
+    leftPressed = false;
+  }
+}
+// function mouseMoveHandler(e) {
+//   var relativeX = e.clientX - canvas.offsetLeft;
+//   if (relativeX > 0 && relativeX < canvas.width) {
+//     paddleX = relativeX - paddleWidth / 2;
+//   }
+// }
+function collisionDetection() {
+  for (var c = 0; c < brickColumnCount; c++) {
+    for (var r = 0; r < brickRowCount; r++) {
+      var b = bricks[c][r];
+      if (b.status == 1) {
+        if (
+          x > b.x &&
+          x < b.x + brickWidth &&
+          y > b.y &&
+          y < b.y + brickHeight
+        ) {
+          vy = -vy;
+          // dy = -dy;
+          b.status = 0;
+          score++;
+          if (score == brickRowCount * brickColumnCount) {
+            // alert("YOU WIN, CONGRATS!");
+            document.getElementById('winner').style.display = 'flex';
+            document.getElementById("diff").style.display = 'none';
+            document.getElementById('winnerTitle').innerText = "Your score is " + score;
+          }
+        }
+      }
+    }
+  }
+}
+
+function drawBall() {
+  ctx.beginPath();
+  ctx.arc(x, y, ballRadius, 0, Math.PI * 2);
+  ctx.fillStyle = "white";
+  ctx.fill();
+  ctx.closePath();
+}
+function drawPaddle() {
+  ctx.beginPath();
+  ctx.rect(paddleX, canvas.height - paddleHeight-0, paddleWidth, paddleHeight);
+  ctx.fillStyle = "white";
+  ctx.fill();
+  ctx.closePath();
+}
+cr = 'rgb('+
+          Math.floor(Math.random()*256)+','+
+          Math.floor(Math.random()*256)+','+
+          Math.floor(Math.random()*256)+')';
+function drawBricks() {
+  for (var c = 0; c < brickColumnCount; c++) {
+    for (var r = 0; r < brickRowCount; r++) {
+
+      if (bricks[c][r].status == 1) {
+        var brickX = r * (brickWidth + brickPadding) + brickOffsetLeft;
+        var brickY = c * (brickHeight + brickPadding) + brickOffsetTop;
+        bricks[c][r].x = brickX;
+        bricks[c][r].y = brickY;
+        ctx.beginPath();
+        ctx.rect(brickX, brickY, brickWidth, brickHeight);
+        ctx.fillStyle = cr;
+        // ctx.fillStyle = 'white';
+        ctx.fill();
+        ctx.closePath();
+      }
+    }
+  }
+  
+  // console.log(brickColumnCount*brickRowCount)
+}
+function drawScore() {
+  ctx.font = "16px Arial";
+  ctx.fillStyle = "white";
+  ctx.fillText("Score: " + score, 8, 20);
+}
+function drawLives() {
+  ctx.font = "16px Arial";
+  ctx.fillStyle = "white";
+  ctx.fillText("Lives: " + lives, canvas.width - 65, 20);
+}
+// function draw() {
+//   ctx.clearRect(0, 0, canvas.width, canvas.height);
+//   drawBricks();
+//   drawBall();
+//   drawPaddle();
+//   drawScore();
+//   drawLives();
+//   collisionDetection();
+//   vx = ball[Math.floor(Math.random()*ball.length)];
+//   vy = ball[Math.floor(Math.random()*ball.length)];
+  
+//   if (x + dx > canvas.width - ballRadius || x + dx < ballRadius) {
+//     dx = -dx;
+//   }
+//   if (y + dy < ballRadius) {
+//     dy = - dy;
+//   } else if (y + dy > canvas.height - ballRadius) {
+//     if (x > paddleX && x < paddleX + paddleWidth) {
+//       dy = -dy;
+//     } else {
+//       lives--;
+//       if (!lives) {
+//         // alert("GAME OVER");
+//         document.getElementById('lose').style.display = 'flex';
+//         document.getElementById("diff").style.display = 'none';
+//         document.getElementById('scoreTitle').innerText = "Your score is " + score;
+//       } else {
+//         x = canvas.width / 2;
+//         y = canvas.height - 30;
+//         dx = 3;
+//         dy = -3;
+//         paddleX = (canvas.width - paddleWidth) / 2;
+//       }
+//     }
+//   }
+//   if (rightPressed && paddleX < canvas.width - paddleWidth) {
+//     paddleX += 10;
+//   } else if (leftPressed && paddleX > 0) {
+//     paddleX -= 10;
+//   }
+//   x += dx;
+//   y += dy;
+//   requestAnimationFrame(draw);
+// }
+// draw();
+function draw() {
+
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  drawBricks();
+  drawBall();
+  drawPaddle();
+  drawScore();
+  drawLives();
+  collisionDetection();
+  
+  if (x + vx > canvas.width - ballRadius || x + vx < ballRadius) {
+    vx = -vx;
+  }
+  if (y + vy < ballRadius) {
+    vy = - vy;
+  } else if (y + vy > canvas.height - ballRadius) {
+    if (x > paddleX && x < paddleX + paddleWidth) {
+      vy = -vy;
+    } else {
+      lives--;
+      if (!lives) {
+        // alert("GAME OVER");
+        document.getElementById('lose').style.display = 'flex';
+        document.getElementById("diff").style.display = 'none';
+        document.getElementById('scoreTitle').innerText = "Your score is " + score;
+      } else {
+        x = canvas.width / 2;
+        y = canvas.height - 30;
+        vx = 2;
+        vy = -2;
+        paddleX = (canvas.width - paddleWidth) / 2;
+      }
+    }
+  }
+  if (rightPressed && paddleX < canvas.width - paddleWidth) {
+    paddleX += 10;
+  } else if (leftPressed && paddleX > 0) {
+    paddleX -= 10;
+  }
+  x += vx;
+  y += vy;
+  requestAnimationFrame(draw);
+}
+function start(){
+  document.getElementById('bttn').style.display = 'none';
+  document.getElementById('h11').style.display = 'none';
+  document.getElementById("diff").style.display = 'flex';
+
+}
+function returnfunc(){
+  document.getElementById('lose').style.display = 'none';
+  document.getElementById("diff").style.display = 'none';
+  document.getElementById('bttn').style.display = 'block';
+  document.getElementById('h11').style.display = 'block';
+  document.location.reload();
+}
+function winn(){
+  document.getElementById('winner').style.display = 'none';
+  // document.getElementById("diff").style.display = 'none';
+  document.getElementById('bttn').style.display = 'block';
+  document.getElementById('h11').style.display = 'block';
+  document.location.reload();
+}
+function easy(){
+  var col = Math.floor(Math.random()*2 + 4);
+  brickColumnCount = col;
+  console.log(col)
+  
+  for (var c = 0; c < brickColumnCount; c++) {
+    bricks[c] = [];
+    for (var r = 0; r < brickRowCount; r++) {
+      bricks[c][r] = { x: 0, y: 0, status: 1 };
+    }
+  }
+  // setInterval(draw, 10000);
+  document.getElementById("diff").style.display = 'none';
+  lives = 3;
+  draw()
+
+}
+function medium(){
+  var col = Math.floor(Math.random()*2 + 6);
+  brickColumnCount = col;
+  console.log(col)
+  
+  for (var c = 0; c < brickColumnCount; c++) {
+    bricks[c] = [];
+    for (var r = 0; r < brickRowCount; r++) {
+      bricks[c][r] = { x: 0, y: 0, status: 1 };
+    }
+  }
+  document.getElementById("diff").style.display = 'none';
+  lives = 3;
+  draw()
+}
+function hard(){
+  var col = Math.floor(Math.random()*2 + 8);
+  brickColumnCount = col;
+  console.log(col)
+  
+  for (var c = 0; c < brickColumnCount; c++) {
+    bricks[c] = [];
+    for (var r = 0; r < brickRowCount; r++) {
+      bricks[c][r] = { x: 0, y: 0, status: 1 };
+    }
+  }
+  document.getElementById("diff").style.display = 'none';
+  lives = 2;
+  draw()
+}
+    </script>
+</html>
